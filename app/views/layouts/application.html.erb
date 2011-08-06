@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rbjobs</title>
+  <title>RubyJobs.ru</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <section id="page" class="container_12">
+    <header id="header" class="container_12 clearfix">
+      <section class="grid_1 prefix_5"><%= image_tag "rubyjobs-logo.png", :size => "78x68" %></section>
+    </header>
+    <section id="content" class="container_12 clearfix">
+      <%= yield %>
+    </section>
+    <footer id="footer" class="container_12 clearfix">
+      <section class="grid_5"><%= link_to "soulim.com" %></section>
+      <nav class="grid_5">
+        <ul>
+          <li><%= link_to "О проекте" %></li>
+          <li><%= link_to "Условия" %></li>
+          <li><%= link_to "Контакты" %></li>
+        </ul>
+      </nav>
+      <section class="grid_2">&copy;&nbsp;2008-2011</section>
+    </footer>
+  </section>
 </body>
 </html>
