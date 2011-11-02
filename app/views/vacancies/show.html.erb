@@ -1,2 +1,36 @@
-<h1>Vacancies#show</h1>
-<p>Find me in app/views/vacancies/show.html.erb</p>
+<% content_for :sidebar do %>
+  <h5>Поддержите вакансию</h5>
+  <p>Поделитесь ссылкой в социальных сетях.</p>
+  <!-- p class="muted">Это предложение о работе актуально до 21.10.2011</p -->
+<% end %>
+
+<article>
+  <h1><%= @vacancy.title %></h1>
+  <h4 class="muted"><%= @vacancy.company %></h4>
+  <%= simple_format @vacancy.description %>
+  <section class="row">
+    <section class="span6">
+      <address>
+        <strong>Компания</strong><br />
+        <%= @vacancy.company %><br />
+        <% unless @vacancy.url.blank? %>
+          <%= link_to @vacancy.url, @vacancy.url %><br />
+        <% end %>
+        <% unless @vacancy.phone.blank? %>
+          Телефон: <%= @vacancy.phone %>
+        <% end %>
+      </address>
+    </section>
+    <section class="span6">
+      <address>
+        <strong>Контактная информация</strong><br />
+        <% unless @vacancy.name.blank? %>
+          <%= @vacancy.name %><br />
+        <% end %>
+        <%= mail_to @vacancy.email, nil, :encode => "hex", :replace_at => "[at]" %>
+      </address>
+    </section>
+   </section>
+</article>
+
+<%#= debug @vacancy %>

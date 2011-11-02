@@ -1,2 +1,19 @@
-<h1>Vacancies#index</h1>
-<p>Find me in app/views/vacancies/index.html.erb</p>
+<% content_for :sidebar do %>
+  <h1>Вакансии для разработчиков, использующих Ruby</h1>
+  <p>Публикация абсолютно бесплатна и не требует регистрации.</p>
+  <p><%= link_to t(".add"), new_vacancy_url, :class => "btn primary" %></p>
+<% end %>
+
+<% @vacancies.in_groups_of(2, false) do |group| %>
+<section class="row">
+  <% for vacancy in group %>
+  <article class="span6">
+    <h1><%= link_to vacancy.title, vacancy %></h1>
+    <h4 class="muted"><%= vacancy.company %></h4>
+    <%= simple_format vacancy.description %>
+  </article>
+  <% end %>
+</section>
+<% end %>
+
+<%= paginate @vacancies %>

@@ -1,0 +1,7 @@
+<%= t(".body", :title => @vacancy.title,
+               :description => @vacancy.description,
+               :company => @vacancy.company,
+               :email => @vacancy.email,
+               :url => @vacancy.url,
+               :vacancy_url => vacancy_url(@vacancy,
+               :token => @vacancy.token)) %>

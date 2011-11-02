@@ -36,6 +36,11 @@ Rbjobs::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
+  # Use Postmark (http://postmartapp.com) for email delivery
+  # More info on https://github.com/wildbit/postmark-rails
+  config.action_mailer.delivery_method   = :postmark
+  config.action_mailer.postmark_settings = { :api_key => "" } # TODO: add Postmark API key
+
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 

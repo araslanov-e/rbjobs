@@ -3,13 +3,11 @@ class CreateVacancies < ActiveRecord::Migration
     create_table  :vacancies do |t|
       t.string    :title
       t.text      :description
-      t.text      :salary
-      t.string    :location
-      t.boolean   :remote
+      t.string    :company
+      t.string    :url
       t.string    :name
       t.string    :email
       t.string    :phone
-      t.string    :url
       t.string    :token
       t.datetime  :expire_at
       t.datetime  :approved_at

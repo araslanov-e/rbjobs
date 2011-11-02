@@ -1,29 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Вакансии для разработчиков, использующих язык Ruby</title>
+  <title><%= t(".meta_title") %></title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <section id="page" class="container_12">
-    <header id="header" class="container_12 clearfix">
-      <section class="grid_1 prefix_5"><%= image_tag "rubyjobs-logo.png", :size => "78x68" %></section>
-    </header>
-    <section id="content" class="container_12 clearfix">
-      <%= yield %>
+  <section class="container">
+    <% flash.each do |key, value| %>
+    <div class="alert-message <%= key %> fade in" data-alert="alert">
+      <a class="close" href="#">×</a>
+      <p><%= value %></p>
+    </div>
+    <% end %>
+    <section class="row content-section">
+      <section class="span4 sidebar">
+        <section class="logo">
+          <%= link_to_if !current_page?(root_url), image_tag("rubyjobs-logo.png", :size => "76x67", :alt => t(".meta_title")), root_url %>
+        </section>
+        <section class="tips">
+          <%= yield(:sidebar) %>
+        </section>
+        <section class="delivery-methods">
+          <h5>Способы доставки</h5>
+          <ul class="unstyled">
+            <li><%= link_to "Читайте через RSS" %></li>
+            <li><%= link_to "Следуйте на Twitter" %></li>
+            <li><%= link_to "Получайте по электронной почте" %></li>
+          </ul>
+        </section>
+      </section>
+      <section class="span12">
+        <%= yield %>
+      </section>
     </section>
-    <footer id="footer" class="container_12 clearfix">
-      <section class="grid_5"><%= link_to "soulim.com", "http://soulim.com" %></section>
-      <nav class="grid_5">
+    <section class="row content-section">
+    </section>
+    <footer class="row footer">
+      <section class="span4">
+        &copy;&nbsp;2008&mdash;2011, <%= link_to "Alex Soulim", "http://soulim.com" %>
+      </section>
+      <nav class="span12">
         <ul>
           <li><%= link_to "О проекте" %></li>
           <li><%= link_to "Условия" %></li>
           <li><%= link_to "Контакты" %></li>
         </ul>
       </nav>
-      <section class="grid_2">&copy;&nbsp;2008-2011</section>
     </footer>
   </section>
 </body>

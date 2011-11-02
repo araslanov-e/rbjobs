@@ -1,0 +1,14 @@
+ru:
+  vacancy_mailer:
+    creation_notice:
+      subject: "Добавлена вакансия '%{title}'"
+      body: |
+        # %{title}
+        
+        %{description}
+        
+        * Компания: %{company}
+        * Электронная почта: <%{email}>
+        * URL: %{url}
+        
+        [Посмотреть на сайте](%{vacancy_url})

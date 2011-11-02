@@ -1,4 +1,6 @@
 Rbjobs::Application.routes.draw do
-  resources :vacancies
-  root :to => 'homepage#index'
+  resources :vacancies do
+    get 'page/:page', :action => :index, :on => :collection
+  end
+  root :to => 'vacancies#index'
 end

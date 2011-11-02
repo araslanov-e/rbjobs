@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe "routes for Vacancies" do
+  it "routes / to the vacancies controller" do
+    { :get => "/" }.
+      should route_to(:controller => "vacancies", :action => "index")
+  end
+  
   it "routes /vacancies to the vacancies controller" do
     { :get => "/vacancies" }.
       should route_to(:controller => "vacancies", :action => "index")
