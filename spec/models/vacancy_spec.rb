@@ -17,7 +17,17 @@ describe Vacancy do
     subject.email = nil
     subject.should_not be_valid
   end
-  
+
+  it "isn't valid with email in wrong format" do
+    subject.email = "wrong@email"
+    subject.should_not be_valid
+  end
+
+  it "isn't valid without expiration date" do
+    subject.expire_at = nil
+    subject.should_not be_valid
+  end
+
   it "assigns token after creating a new record" do
     subject.token = nil
     subject.save!
