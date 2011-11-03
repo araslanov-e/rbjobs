@@ -1,7 +1,15 @@
 require 'spec_helper'
 
 describe Vacancy do
-  subject { build(:vacancy) }
+  subject do
+    stub_model(Vacancy, {
+      :title       => "Foo",
+      :description => "Lorem ipsum",
+      :company     => "Foo Inc.",
+      :email       => "person@example.com",
+      :expire_at   => 1.week.from_now
+    }).as_new_record
+  end
   
   it "isn't valid without title" do
     subject.title = nil

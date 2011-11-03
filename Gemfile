@@ -10,10 +10,6 @@ group :development do
   gem 'letter_opener', '~> 0.0.2'
 end
 
-group :test do
-  gem 'factory_girl_rails'
-end
-
 group :development, :test do
   gem 'rspec-rails'
 end
