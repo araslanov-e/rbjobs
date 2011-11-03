@@ -16,8 +16,18 @@ describe "routes for Vacancies" do
       should route_to(:controller => "vacancies", :action => "new")
   end
 
+  it "routes /vacancies to the :create action of vacancies controller" do
+    { :post => "/vacancies" }.
+      should route_to(:controller => "vacancies", :action => "create")
+  end
+
   it "routes /vacancies/123 to the :show action of vacancies controller" do
     { :get => "/vacancies/123" }.
       should route_to(:controller => "vacancies", :action => "show", :id => "123")
+  end
+
+  it "routes /vacancies/123/edit to the :edit action of vacancies controller" do
+    { :get => "/vacancies/123/edit" }.
+      should route_to(:controller => "vacancies", :action => "edit", :id => "123")
   end
 end
