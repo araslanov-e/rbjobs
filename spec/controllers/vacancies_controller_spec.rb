@@ -110,7 +110,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           get 'show', :id => vacancy
-          response.should render_template('public/404.html')
+          response.should render_template(:file => 'public/404.html')
         end
       end
     end
