@@ -16,4 +16,9 @@ class Vacancy < ActiveRecord::Base
   scope :approved, where("approved_at IS NOT NULL")
   scope :not_approved, where({ :approved_at => nil })
   scope :not_outdated, where("expire_at >= ?", Date.current)
+  scope :available, approved.not_outdated
+  
+  def approved?
+    self.approved_at.present?
+  end
 end

@@ -41,4 +41,21 @@ describe Vacancy do
     subject.save!
     subject.token.should_not be_blank
   end
+  
+  describe "#approved?" do
+    context "when vacancy has approving mark" do
+      before{ subject.approved_at = Date.current }
+      
+      it "should return true" do
+        subject.should be_approved
+      end
+    end
+    context "when vacancy doesn't have approving mark" do
+      before{ subject.approved_at = nil }
+      
+      it "should return false" do
+        subject.should_not be_approved
+      end
+    end
+  end
 end
