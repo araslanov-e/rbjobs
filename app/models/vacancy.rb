@@ -10,7 +10,8 @@ class Vacancy < ActiveRecord::Base
   validates :expire_at, :presence => true
   
   before_create do |vacancy|
-    vacancy.token = Vacancy.generate_token
+    vacancy.owner_token = Vacancy.generate_token
+    vacancy.admin_token = Vacancy.generate_token
   end
 
   scope :approved, where("approved_at IS NOT NULL")

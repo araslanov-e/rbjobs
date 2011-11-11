@@ -18,17 +18,17 @@ describe Vacancy do
 
   it "isn't valid without description" do
     subject.description = nil
-    subject.should_not be_valid
+    should_not be_valid
   end
 
   it "isn't valid without email" do
     subject.email = nil
-    subject.should_not be_valid
+    should_not be_valid
   end
 
   it "isn't valid with email in wrong format" do
     subject.email = "wrong@email"
-    subject.should_not be_valid
+    should_not be_valid
   end
 
   it "isn't valid without expiration date" do
@@ -36,12 +36,19 @@ describe Vacancy do
     subject.should_not be_valid
   end
 
-  it "assigns token after creating a new record" do
-    subject.token = nil
-    subject.save!
-    subject.token.should_not be_blank
+  context "after creating a new record" do
+    it "assigns owner token" do
+      subject.owner_token = nil
+      subject.save!
+      subject.owner_token.should_not be_blank
+    end
+    it "assigns admin token" do
+      subject.admin_token = nil
+      subject.save!
+      subject.admin_token.should_not be_blank
+    end
   end
-  
+
   describe "#approved?" do
     context "when vacancy has approving mark" do
       before{ subject.approved_at = Date.current }
