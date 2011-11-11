@@ -42,7 +42,7 @@ class VacanciesController < ApplicationController
     case action
     when :read
       return vacancy.approved? || admin?(vacancy)
-    when [:edit, :update]
+    when :edit, :update
       return owner?(vacancy) || admin?(vacancy)
     when :destroy
       return admin?(vacancy)
@@ -51,15 +51,13 @@ class VacanciesController < ApplicationController
     end
   end
   
-  # TODO: Replace vacancy.token with vacancy.owner_token
   def owner?(vacancy)
-    tokens.include?(vacancy.token)
+    tokens.include?(vacancy.owner_token)
   end
   helper_method :owner?
 
-  # TODO: Replace vacancy.token with vacancy.admin_token
   def admin?(vacancy)
-    tokens.include?(vacancy.token)
+    tokens.include?(vacancy.admin_token)
   end
   helper_method :admin?
 

@@ -89,17 +89,21 @@ describe VacanciesController do
       end
     end
     context "when vacancy hasn't been approved" do
-      before{ vacancy.stub!(:approved? => false, :token => "foo") }
+      before{ vacancy.stub!(:approved? => false, :owner_token => "owner", :admin_token => "admin") }
 
       context "and visitor has owner token" do
-        it "should be success" do
-          get 'show', :id => vacancy, :token => vacancy.token
-          response.should be_success
+        it "should be not found" do
+          get 'show', :id => vacancy, :token => vacancy.owner_token
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          get 'show', :id => vacancy, :token => vacancy.owner_token
+          response.should render_template(:file => 'public/404.html')
         end
       end
       context "and visitor has admin token" do
         it "should be success" do
-          get 'show', :id => vacancy, :token => vacancy.token
+          get 'show', :id => vacancy, :token => vacancy.admin_token
           response.should be_success
         end
       end
