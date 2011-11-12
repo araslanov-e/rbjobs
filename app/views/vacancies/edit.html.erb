@@ -1,2 +1,4 @@
-<h1>Vacancies#edit</h1>
-<p>Find me in app/views/vacancies/edit.html.erb</p>
+<section class="span12">
+  <header class="page-header"><h1><%= t(".title") %></h1></header>
+  <%= render :partial => "form", :locals => { :vacancy => @vacancy } %>
+</section>

@@ -80,10 +80,11 @@ describe VacanciesController do
   
   describe "GET 'show'" do
     before{ Vacancy.stub!(:find_by_id! => vacancy) }
+    
     context "when vacancy has been approved" do
       before{ vacancy.stub!(:approved? => true) }
       
-      it "should be success" do
+      it "should be successful" do
         get 'show', :id => vacancy
         response.should be_success
       end
@@ -114,6 +115,194 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           get 'show', :id => vacancy
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+    end
+  end
+  
+  describe "GET 'edit'" do
+    before do
+      vacancy.stub(:owner_token => "owner", :admin_token => "admin")
+      Vacancy.stub!(:find_by_id! => vacancy)
+    end
+
+    context "when vacancy has been approved" do
+      before{ vacancy.stub(:approved? => true) }
+      
+      context "and user has owner token" do
+        it "should be successful" do
+          get 'edit', :id => vacancy, :token => vacancy.owner_token
+          response.should be_success
+        end
+      end
+      context "and user has admin token" do
+        it "should be successful" do
+          get 'edit', :id => vacancy, :token => vacancy.admin_token
+          response.should be_success
+        end
+      end
+      context "and user doesn't have any token" do
+        it "should be not found" do
+          get 'edit', :id => vacancy
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          get 'edit', :id => vacancy
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+    end
+    context "when vacancy has not been approved" do
+      before{ vacancy.stub(:approved? => false) }
+      
+      context "and user has owner token" do
+        it "should be not found" do
+          get 'edit', :id => vacancy, :token => vacancy.owner_token
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          get 'edit', :id => vacancy, :token => vacancy.owner_token
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+      context "and user has admin token" do
+        it "should be success" do
+          get 'edit', :id => vacancy, :token => vacancy.admin_token
+          response.should be_success
+        end
+      end
+      context "and user doesn't have any token" do
+        it "should be not found" do
+          get 'edit', :id => vacancy
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          get 'edit', :id => vacancy
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+    end
+  end
+  
+  describe "PUT 'update'" do
+    before do
+      vacancy.stub(:owner_token => "owner", :admin_token => "admin")
+      Vacancy.stub!(:find_by_id! => vacancy)
+    end
+
+    context "when vacancy has been approved" do
+      before{ vacancy.stub(:approved? => true) }
+      
+      context "and user has owner token" do
+        context "and vacancy is valid" do
+          before{ vacancy.stub(:valid? => true) }
+          
+          it "should redirect to vacancy's page" do
+            put 'update', :id => vacancy, :token => vacancy.owner_token
+            response.should redirect_to vacancy_url(vacancy)
+          end
+          it "should set flash notification" do
+            put 'update', :id => vacancy, :token => vacancy.owner_token
+            flash.should_not be_blank
+          end
+        end
+        context "and vacancy is not valid" do
+          before{ vacancy.stub(:valid? => false, :errors => { :foo => "bar" }) }
+          
+          it "should be successful" do
+            put 'update', :id => vacancy, :token => vacancy.owner_token
+            response.should be_success
+          end
+          it "should render edit page" do
+            put 'update', :id => vacancy, :token => vacancy.owner_token
+            response.should render_template(:edit)
+          end
+        end
+      end
+      context "and user has admin token" do
+        context "and vacancy is valid" do
+          before{ vacancy.stub(:valid? => true) }
+          
+          it "should redirect to vacancy's page" do
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+            response.should redirect_to vacancy_url(vacancy)
+          end
+          it "should set flash notification" do
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+            flash.should_not be_blank
+          end
+        end
+        context "and vacancy is not valid" do
+          before{ vacancy.stub(:valid? => false, :errors => { :foo => "bar" }) }
+          
+          it "should be successful" do
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+            response.should be_success
+          end
+          it "should render edit page" do
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+            response.should render_template(:edit)
+          end
+        end
+      end
+      context "and user doesn't have any token" do
+        it "should be not found" do
+          put 'update', :id => vacancy
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          put 'update', :id => vacancy
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+    end
+    context "when vacancy has not been approved" do
+      before{ vacancy.stub(:approved? => false) }
+      
+      context "and user has owner token" do
+        it "should be not found" do
+          put 'update', :id => vacancy, :token => vacancy.owner_token
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          put 'update', :id => vacancy, :token => vacancy.owner_token
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+      context "and user has admin token" do
+        context "and vacancy is valid" do
+          before{ vacancy.stub(:valid? => true) }
+          
+          it "should redirect to vacancy's page" do
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+            response.should redirect_to vacancy_url(vacancy)
+          end
+          it "should set flash notification" do
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+            flash.should_not be_blank
+          end
+        end
+        context "and vacancy is not valid" do
+          before{ vacancy.stub(:valid? => false, :errors => { :foo => "bar" }) }
+          
+          it "should be successful" do
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+            response.should be_success
+          end
+          it "should render edit page" do
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+            response.should render_template(:edit)
+          end
+        end
+      end
+      context "and user doesn't have any token" do
+        it "should be not found" do
+          put 'update', :id => vacancy
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          put 'update', :id => vacancy
           response.should render_template(:file => 'public/404.html')
         end
       end

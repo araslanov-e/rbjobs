@@ -1,4 +1,4 @@
-  <%= form_for @vacancy do |f| %>
+  <%= form_for vacancy do |f| %>
     <fieldset>
       <div class="clearfix <%= "error" if f.object.errors.include?(:title) %>">
         <%= f.label :title, "<strong>#{t("activerecord.attributes.vacancy.title")}</strong>".html_safe %>
@@ -24,20 +24,20 @@
           <ul class="inputs-list">
             <li>
               <label>
-                <%= f.radio_button :expire_at, Date.current + 1.week %>
-                <span><%= t(".notes.expire_at_one_week") %><span class="help-inline">&mdash; <%= t(".notes.valid_until", :date => l(Date.current + 1.week)) %></span></span>
+                <%= f.radio_button :expire_at, (f.object.persisted? ? f.object.created_at.to_date : Date.current) + 1.week %>
+                <span><%= t(".notes.expire_at_one_week") %><span class="help-inline">&mdash; <%= t(".notes.valid_until", :date => l((f.object.persisted? ? f.object.created_at.to_date : Date.current) + 1.week)) %></span></span>
               </label>
             </li>
             <li>
               <label>
-                <%= f.radio_button :expire_at, Date.current + 2.weeks %>
-                <span><%= t(".notes.expire_at_two_weeks") %><span class="help-inline">&mdash; <%= t(".notes.valid_until", :date => l(Date.current + 2.weeks)) %></span></span>
+                <%= f.radio_button :expire_at, (f.object.persisted? ? f.object.created_at.to_date : Date.current) + 2.weeks %>
+                <span><%= t(".notes.expire_at_two_weeks") %><span class="help-inline">&mdash; <%= t(".notes.valid_until", :date => l((f.object.persisted? ? f.object.created_at.to_date : Date.current) + 2.weeks)) %></span></span>
               </label>
             </li>
             <li>
               <label>
-                <%= f.radio_button :expire_at, Date.current + 1.month %>
-                <span><%= t(".notes.expire_at_one_month") %><span class="help-inline">&mdash; <%= t(".notes.valid_until", :date => l(Date.current + 1.month)) %></span></span>
+                <%= f.radio_button :expire_at, (f.object.persisted? ? f.object.created_at.to_date : Date.current) + 1.month %>
+                <span><%= t(".notes.expire_at_one_month") %><span class="help-inline">&mdash; <%= t(".notes.valid_until", :date => l((f.object.persisted? ? f.object.created_at.to_date : Date.current) + 1.month)) %></span></span>
               </label>
             </li>
           </ul>
@@ -81,8 +81,13 @@
       </div>
     </fieldset>
     <div class="actions">
-      <p><%= t(".notes.terms") %></p>
-      <%= f.submit t(".create"), :class => "btn success" %> 
-      <%= link_to t(".cancel"), root_url, :class => "btn" %>
+      <% if f.object.persisted? %>
+        <%= f.submit t(".update"), :class => "btn success" %> 
+        <%= link_to t(".cancel"), vacancy_url(f.object), :class => "btn" %>
+      <% else %>
+        <p><%= t(".notes.terms") %></p>
+        <%= f.submit t(".create"), :class => "btn success" %> 
+        <%= link_to t(".cancel"), root_url, :class => "btn" %>
+      <% end %>
     </div>
   <% end %>

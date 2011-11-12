@@ -1,6 +1,9 @@
 // = require_self
 // = require_tree .
 
+.button_to {
+  display:inline-block;
+}
 .field_with_errors {
   display:inline;
 }

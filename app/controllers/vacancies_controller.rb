@@ -1,11 +1,11 @@
 class VacanciesController < ApplicationController
-  before_filter :assign_vacancy, :only => [:show]
-  before_filter :store_token, :only => [:show]
+  before_filter :assign_vacancy, :only => [:show, :edit, :update]
+  before_filter :store_token, :only => [:show, :edit, :update]
   
   respond_to :html
   
   def index
-    @vacancies = Vacancy.available.page(params[:page]).per(2)
+    @vacancies = Vacancy.available.page(params[:page]).per(4)
     respond_with(@vacancies)
   end
 
@@ -31,7 +31,24 @@ class VacanciesController < ApplicationController
       render(:file => 'public/404.html', :layout => false, :status => :not_found)
     end
   end
-  
+
+  def edit
+    if authorize!(:edit, @vacancy)
+      respond_with(@vacancy)
+    else
+      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+    end
+  end
+
+  def update
+    if authorize!(:update, @vacancy)
+      @vacancy.update_attributes(params[:vacancy]) and flash[:success] = t("vacancies.update.success")
+      respond_with(@vacancy)
+    else
+      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+    end
+  end
+
   private
   
   def assign_vacancy
@@ -43,7 +60,7 @@ class VacanciesController < ApplicationController
     when :read
       return vacancy.approved? || admin?(vacancy)
     when :edit, :update
-      return owner?(vacancy) || admin?(vacancy)
+      return (vacancy.approved? && owner?(vacancy)) || admin?(vacancy)
     when :destroy
       return admin?(vacancy)
     else
