@@ -1,6 +1,6 @@
 class VacanciesController < ApplicationController
-  before_filter :assign_vacancy, :only => [:show, :edit, :update]
-  before_filter :store_token, :only => [:show, :edit, :update]
+  before_filter :assign_vacancy, :only => [:show, :edit, :update, :destroy]
+  before_filter :store_token, :only => [:show, :edit, :update, :destroy]
   
   respond_to :html
   
@@ -43,6 +43,15 @@ class VacanciesController < ApplicationController
   def update
     if authorize!(:update, @vacancy)
       @vacancy.update_attributes(params[:vacancy]) and flash[:success] = t("vacancies.update.success")
+      respond_with(@vacancy)
+    else
+      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+    end
+  end
+
+  def destroy
+    if authorize!(:destroy, @vacancy)
+      @vacancy.destroy and flash[:success] = t("vacancies.destroy.success")
       respond_with(@vacancy)
     else
       render(:file => 'public/404.html', :layout => false, :status => :not_found)

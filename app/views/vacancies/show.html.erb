@@ -1,13 +1,6 @@
 <% content_for :sidebar do %>
-  <% if admin?(@vacancy) %>
-    <%= button_to "Опубликовать", nil, :method => "put", :class => "small btn success" %>
-    <%= link_to "Редактировать", edit_vacancy_url(@vacancy), :class => "small btn" %>
-  <% elsif owner?(@vacancy) %>
-    <%= link_to "Редактировать", edit_vacancy_url(@vacancy), :class => "btn" %>
-  <% else %>
-    <h5>Поддержите вакансию</h5>
-    <p>Поделитесь ссылкой в социальных сетях.</p>
-  <% end %>
+  <h5>Поддержите вакансию</h5>
+  <p>Поделитесь ссылкой в социальных сетях.</p>
 <% end %>
 
 <article>
@@ -37,4 +30,15 @@
       </address>
     </section>
    </section>
+  <% if admin?(@vacancy) %>
+    <section class="actions form-stacked">
+      <%= button_to "Опубликовать", nil, :method => "put", :class => "small btn success" %>
+      <%= link_to "Редактировать", edit_vacancy_url(@vacancy), :class => "small btn" %>
+      <%= button_to "Удалить", vacancy_url(@vacancy), :method => "delete", :confirm => "Подтверждаем удаление вакансии?", :class => "small btn danger" %>
+    </section>
+  <% elsif owner?(@vacancy) %>
+    <section class="actions form-stacked">
+      <%= link_to "Редактировать", edit_vacancy_url(@vacancy), :class => "btn" %>
+    </section>
+  <% end %>
 </article>

@@ -130,19 +130,19 @@ describe VacanciesController do
     context "when vacancy has been approved" do
       before{ vacancy.stub(:approved? => true) }
       
-      context "and user has owner token" do
+      context "and visitor has owner token" do
         it "should be successful" do
           get 'edit', :id => vacancy, :token => vacancy.owner_token
           response.should be_success
         end
       end
-      context "and user has admin token" do
+      context "and visitor has admin token" do
         it "should be successful" do
           get 'edit', :id => vacancy, :token => vacancy.admin_token
           response.should be_success
         end
       end
-      context "and user doesn't have any token" do
+      context "and visitor doesn't have any token" do
         it "should be not found" do
           get 'edit', :id => vacancy
           response.should be_not_found
@@ -156,7 +156,7 @@ describe VacanciesController do
     context "when vacancy has not been approved" do
       before{ vacancy.stub(:approved? => false) }
       
-      context "and user has owner token" do
+      context "and visitor has owner token" do
         it "should be not found" do
           get 'edit', :id => vacancy, :token => vacancy.owner_token
           response.should be_not_found
@@ -166,13 +166,13 @@ describe VacanciesController do
           response.should render_template(:file => 'public/404.html')
         end
       end
-      context "and user has admin token" do
+      context "and visitor has admin token" do
         it "should be success" do
           get 'edit', :id => vacancy, :token => vacancy.admin_token
           response.should be_success
         end
       end
-      context "and user doesn't have any token" do
+      context "and visitor doesn't have any token" do
         it "should be not found" do
           get 'edit', :id => vacancy
           response.should be_not_found
@@ -194,10 +194,14 @@ describe VacanciesController do
     context "when vacancy has been approved" do
       before{ vacancy.stub(:approved? => true) }
       
-      context "and user has owner token" do
+      context "and visitor has owner token" do
         context "and vacancy is valid" do
           before{ vacancy.stub(:valid? => true) }
           
+          it "should update vacancy" do
+            vacancy.should_receive(:update_attributes)
+            put 'update', :id => vacancy, :token => vacancy.owner_token
+          end
           it "should redirect to vacancy's page" do
             put 'update', :id => vacancy, :token => vacancy.owner_token
             response.should redirect_to vacancy_url(vacancy)
@@ -220,10 +224,14 @@ describe VacanciesController do
           end
         end
       end
-      context "and user has admin token" do
+      context "and visitor has admin token" do
         context "and vacancy is valid" do
           before{ vacancy.stub(:valid? => true) }
           
+          it "should update vacancy" do
+            vacancy.should_receive(:update_attributes)
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+          end
           it "should redirect to vacancy's page" do
             put 'update', :id => vacancy, :token => vacancy.admin_token
             response.should redirect_to vacancy_url(vacancy)
@@ -246,7 +254,7 @@ describe VacanciesController do
           end
         end
       end
-      context "and user doesn't have any token" do
+      context "and visitor doesn't have any token" do
         it "should be not found" do
           put 'update', :id => vacancy
           response.should be_not_found
@@ -260,7 +268,7 @@ describe VacanciesController do
     context "when vacancy has not been approved" do
       before{ vacancy.stub(:approved? => false) }
       
-      context "and user has owner token" do
+      context "and visitor has owner token" do
         it "should be not found" do
           put 'update', :id => vacancy, :token => vacancy.owner_token
           response.should be_not_found
@@ -270,10 +278,14 @@ describe VacanciesController do
           response.should render_template(:file => 'public/404.html')
         end
       end
-      context "and user has admin token" do
+      context "and visitor has admin token" do
         context "and vacancy is valid" do
           before{ vacancy.stub(:valid? => true) }
           
+          it "should update vacancy" do
+            vacancy.should_receive(:update_attributes)
+            put 'update', :id => vacancy, :token => vacancy.admin_token
+          end
           it "should redirect to vacancy's page" do
             put 'update', :id => vacancy, :token => vacancy.admin_token
             response.should redirect_to vacancy_url(vacancy)
@@ -296,13 +308,97 @@ describe VacanciesController do
           end
         end
       end
-      context "and user doesn't have any token" do
+      context "and visitor doesn't have any token" do
         it "should be not found" do
           put 'update', :id => vacancy
           response.should be_not_found
         end
         it "should render 404 page" do
           put 'update', :id => vacancy
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+    end
+  end
+  
+  describe "DELETE 'destroy'" do
+    before do
+      vacancy.stub(:persisted? => false, :owner_token => "owner", :admin_token => "admin")
+      Vacancy.stub!(:find_by_id! => vacancy)
+    end
+    
+    context "when vacancy has been approved" do
+      before{ vacancy.stub(:approved? => true) }
+      
+      context "and visitor has owner token" do
+        it "should be not found" do
+          delete 'destroy', :id => vacancy, :token => vacancy.owner_token
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          delete 'destroy', :id => vacancy, :token => vacancy.owner_token
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+      context "and visitor has admin token" do
+        it "should destroy vacancy" do
+          vacancy.should_receive(:destroy)
+          delete 'destroy', :id => vacancy, :token => vacancy.admin_token
+        end
+        it "should redirect to vacancies page" do
+          delete 'destroy', :id => vacancy, :token => vacancy.admin_token
+          response.should redirect_to vacancies_url
+        end
+        it "should set flash notification" do
+          delete 'destroy', :id => vacancy, :token => vacancy.admin_token
+          flash.should_not be_blank
+        end
+      end
+      context "and visitor doesn't have any token" do
+        it "should be not found" do
+          delete 'destroy', :id => vacancy
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          delete 'destroy', :id => vacancy
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+    end
+    context "when vacancy has not been approved" do
+      before{ vacancy.stub(:approved? => false) }
+      
+      context "and visitor has owner token" do
+        it "should be not found" do
+          delete 'destroy', :id => vacancy, :token => vacancy.owner_token
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          delete 'destroy', :id => vacancy, :token => vacancy.owner_token
+          response.should render_template(:file => 'public/404.html')
+        end
+      end
+      context "and visitor has admin token" do
+        it "should destroy vacancy" do
+          vacancy.should_receive(:destroy)
+          delete 'destroy', :id => vacancy, :token => vacancy.admin_token
+        end
+        it "should redirect to vacancies page" do
+          delete 'destroy', :id => vacancy, :token => vacancy.admin_token
+          response.should redirect_to vacancies_url
+        end
+        it "should set flash notification" do
+          delete 'destroy', :id => vacancy, :token => vacancy.admin_token
+          flash.should_not be_blank
+        end
+      end
+      context "and visitor doesn't have any token" do
+        it "should be not found" do
+          delete 'destroy', :id => vacancy
+          response.should be_not_found
+        end
+        it "should render 404 page" do
+          delete 'destroy', :id => vacancy
           response.should render_template(:file => 'public/404.html')
         end
       end
