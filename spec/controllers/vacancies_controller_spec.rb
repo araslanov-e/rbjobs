@@ -404,4 +404,55 @@ describe VacanciesController do
       end
     end
   end
+  
+  describe "PUT 'approve'" do
+    before do
+      vacancy.stub(:owner_token => "owner", :admin_token => "admin")
+      Vacancy.stub!(:find_by_id! => vacancy)
+    end
+
+    context "when visitor has owner token" do
+      it "should be not found" do
+        put 'approve', :id => vacancy, :token => vacancy.owner_token
+        response.should be_not_found
+      end
+      it "should render 404 page" do
+        put 'approve', :id => vacancy, :token => vacancy.owner_token
+        response.should render_template(:file => 'public/404.html')
+      end
+    end
+    context "when visitor has admin token" do
+      before do
+        vacancy.stub(:approve! => true)
+        VacancyMailer.stub_chain(:approval_notice, :deliver)
+      end
+      
+      it "should approve vacancy" do
+        vacancy.should_receive(:approve!)
+        put 'approve', :id => vacancy, :token => vacancy.admin_token
+      end
+      it "should deliver email notification" do
+        VacancyMailer.should_receive(:approval_notice).with(vacancy)
+        put 'approve', :id => vacancy, :token => vacancy.admin_token
+      end
+      it "should redirect to vacancy's page" do
+        put 'approve', :id => vacancy, :token => vacancy.admin_token
+        response.should redirect_to vacancy_url(vacancy)
+      end
+      it "should set flash notification" do
+        put 'approve', :id => vacancy, :token => vacancy.admin_token
+        flash.should_not be_blank
+      end
+    end
+    context "and visitor doesn't have any token" do
+      it "should be not found" do
+        put 'approve', :id => vacancy
+        response.should be_not_found
+      end
+      it "should render 404 page" do
+        put 'approve', :id => vacancy
+        response.should render_template(:file => 'public/404.html')
+      end
+    end
+  end
 end

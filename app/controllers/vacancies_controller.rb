@@ -1,6 +1,6 @@
 class VacanciesController < ApplicationController
-  before_filter :assign_vacancy, :only => [:show, :edit, :update, :destroy]
-  before_filter :store_token, :only => [:show, :edit, :update, :destroy]
+  before_filter :assign_vacancy, :except => [:index, :new, :create]
+  before_filter :store_token, :except => [:index, :new, :create]
   
   respond_to :html
   
@@ -57,6 +57,16 @@ class VacanciesController < ApplicationController
       render(:file => 'public/404.html', :layout => false, :status => :not_found)
     end
   end
+  
+  def approve
+    if authorize!(:approve, @vacancy)
+      @vacancy.approve! and flash[:success] = t("vacancies.approve.success")
+      VacancyMailer.approval_notice(@vacancy).deliver
+      respond_with(@vacancy)
+    else
+      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+    end
+  end
 
   private
   
@@ -70,7 +80,7 @@ class VacanciesController < ApplicationController
       return vacancy.approved? || admin?(vacancy)
     when :edit, :update
       return (vacancy.approved? && owner?(vacancy)) || admin?(vacancy)
-    when :destroy
+    when :destroy, :approve
       return admin?(vacancy)
     else
       raise StandartError

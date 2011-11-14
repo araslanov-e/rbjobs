@@ -32,7 +32,7 @@
    </section>
   <% if admin?(@vacancy) %>
     <section class="actions form-stacked">
-      <%= button_to "Опубликовать", nil, :method => "put", :class => "small btn success" %>
+      <%= button_to("Опубликовать", approve_vacancy_url(@vacancy), :method => "put", :class => "small btn success") unless @vacancy.approved? %>
       <%= link_to "Редактировать", edit_vacancy_url(@vacancy), :class => "small btn" %>
       <%= button_to "Удалить", vacancy_url(@vacancy), :method => "delete", :confirm => "Подтверждаем удаление вакансии?", :class => "small btn danger" %>
     </section>

@@ -22,4 +22,8 @@ class Vacancy < ActiveRecord::Base
   def approved?
     self.approved_at.present?
   end
+  
+  def approve!
+    self.approved_at = Time.now and self.save!
+  end
 end

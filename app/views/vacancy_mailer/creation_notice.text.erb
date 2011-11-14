@@ -3,5 +3,4 @@
                :company => @vacancy.company,
                :email => @vacancy.email,
                :url => @vacancy.url,
-               :vacancy_url => vacancy_url(@vacancy,
-               :token => @vacancy.token)) %>
+               :vacancy_url => vacancy_url(@vacancy, :token => @vacancy.admin_token)) %>
