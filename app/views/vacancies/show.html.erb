@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
 <% end %>
-<% content_for :meta_title, "#{@vacancy.title} - RubyJobs.ru" %>
+<% content_for :meta_title, t(".meta_title", :vacancy => @vacancy.title) %>
 <% content_for :js do %>
   <!-- Facebook -->
   <div id="fb-root"></div>
