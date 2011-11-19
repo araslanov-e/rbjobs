@@ -1,3 +1,4 @@
+// = require bootstrap.min
 // = require_self
 // = require_tree .
 
@@ -9,8 +10,7 @@
 .field_with_errors {
   display:inline;
 }
-
-sidebar {
+.sidebar {
   color:#808080;
 }
 .sidebar h1, .sidebar h5 {
