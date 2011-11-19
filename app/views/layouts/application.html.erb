@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= t(".meta_title") %></title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
+  <meta charset="utf-8" />
+  <title><%= yield(:meta_title) || t(".meta_title") %></title>
+  <%= stylesheet_link_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <!-- Facebook -->
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=293040454063703";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
-  <!-- /Facebook -->
   <section class="container">
     <% flash.each do |key, value| %>
     <div class="alert-message <%= key %> fade in" data-alert="alert">
@@ -52,5 +42,8 @@
       </nav>
     </footer>
   </section>
+  
+  <%= javascript_include_tag "application" %>
+  <%= yield(:js) %>
 </body>
 </html>
