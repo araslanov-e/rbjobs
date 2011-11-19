@@ -29,6 +29,17 @@
 .sidebar .delivery-methods a {
   color:#808080;
 }
+.share-buttons {
+  margin-left:0;
+  padding-top:0.2em;
+  list-style:none outside;
+}
+.share-buttons li {
+  display:inline-block;
+  vertical-align:middle;
+  margin:0;
+  padding:0 5px 0 0;
+}
 
 .content-section {
   padding-top:39px;
@@ -40,7 +51,7 @@
 }
 .footer nav ul {
   list-style:none;
-  -margin:0;
+  margin:0;
   padding:0;
 }
 .footer nav ul li {
