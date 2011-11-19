@@ -70,6 +70,7 @@ class VacanciesController < ApplicationController
 
   private
   
+  # TODO: Move authorization code to separete module
   def assign_vacancy
     @vacancy = Vacancy.find_by_id!(params[:id])
   end

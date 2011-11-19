@@ -1,0 +1,12 @@
+ru:
+  pages:
+    show:
+      about:
+        title: "О проекте"
+        body: "..."
+      terms:
+        title: "Условия сервиса"
+        body: "..."
+      contacts:
+        title: "Контактная информация"
+        body: "..."

@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+# TODO: Refactor specs for VacanciesController
 describe VacanciesController do
   let(:vacancy){ stub_model(Vacancy) }
   
