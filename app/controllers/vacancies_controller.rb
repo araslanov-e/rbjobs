@@ -5,7 +5,7 @@ class VacanciesController < ApplicationController
   respond_to :html
   
   def index
-    @vacancies = Vacancy.available.page(params[:page]).per(4)
+    @vacancies = Vacancy.available.page(params[:page]).per(6)
     respond_with(@vacancies)
   end
 

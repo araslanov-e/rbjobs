@@ -48,6 +48,14 @@ describe Vacancy do
       subject.admin_token.should_not be_blank
     end
   end
+  
+  context "after saving the vacancy" do
+    it "assigns vacancy's excerpt" do
+      subject.excerpt = nil
+      subject.save!
+      subject.excerpt.should_not be_blank
+    end
+  end
 
   describe "#approved?" do
     context "when vacancy has approving mark" do
