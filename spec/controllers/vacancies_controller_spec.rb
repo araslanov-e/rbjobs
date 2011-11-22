@@ -2,7 +2,7 @@ require 'spec_helper'
 
 # TODO: Refactor specs for VacanciesController
 describe VacanciesController do
-  let(:vacancy){ stub_model(Vacancy) }
+  let(:vacancy){ stub_model(Vacancy, :title => "Foo", :description => "Lorem ipsum") }
   
   describe "GET 'index'" do
     before do

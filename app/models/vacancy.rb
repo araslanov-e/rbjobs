@@ -14,7 +14,9 @@ class Vacancy < ActiveRecord::Base
     vacancy.admin_token = Vacancy.generate_token
   end
   
-  before_save :assign_excerpt
+  before_save do |vacancy|
+    vacancy.excerpt = extract_excerpt(vacancy.description)
+  end
 
   scope :approved, where("approved_at IS NOT NULL")
   scope :not_approved, where({ :approved_at => nil })
@@ -31,10 +33,6 @@ class Vacancy < ActiveRecord::Base
   end
   
   protected
-  
-  def assign_excerpt
-    self.excerpt = extract_excerpt(self.description)
-  end
   
   # Take the first to parts of text divided with two new new lines
   def extract_excerpt(text, divider = "\n")
