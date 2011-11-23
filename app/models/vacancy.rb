@@ -2,8 +2,6 @@ require "token_generator"
 require "html_generator"
 
 class Vacancy < ActiveRecord::Base
-  extend TokenGenerator
-  
   validates :title, :presence => true
   validates :description, :presence => true
   validates :company, :presence => true
@@ -11,8 +9,8 @@ class Vacancy < ActiveRecord::Base
   validates :expire_at, :presence => true
   
   before_create do |vacancy|
-    vacancy.owner_token = Vacancy.generate_token
-    vacancy.admin_token = Vacancy.generate_token
+    vacancy.owner_token = TokenGenerator.generate_token
+    vacancy.admin_token = TokenGenerator.generate_token
   end
   
   before_save do |vacancy|

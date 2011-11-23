@@ -51,9 +51,14 @@ describe Vacancy do
   
   context "after saving the vacancy" do
     it "assigns vacancy's excerpt" do
-      subject.excerpt = nil
+      subject.excerpt_html = nil
       subject.save!
-      subject.excerpt.should_not be_blank
+      subject.excerpt_html.should_not be_blank
+    end
+    it "assigns vacancy's description as html" do
+      subject.description_html = nil
+      subject.save!
+      subject.description_html.should_not be_blank
     end
   end
 
