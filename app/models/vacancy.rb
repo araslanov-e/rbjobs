@@ -1,4 +1,5 @@
 require "token_generator"
+require "html_generator"
 
 class Vacancy < ActiveRecord::Base
   extend TokenGenerator
@@ -15,7 +16,8 @@ class Vacancy < ActiveRecord::Base
   end
   
   before_save do |vacancy|
-    vacancy.excerpt = extract_excerpt(vacancy.description)
+    vacancy.excerpt_html     = HtmlGenerator.render extract_excerpt(vacancy.description)
+    vacancy.description_html = HtmlGenerator.render vacancy.description
   end
 
   scope :approved, where("approved_at IS NOT NULL")

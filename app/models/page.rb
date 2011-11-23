@@ -1,3 +1,5 @@
+require "html_generator"
+
 class Page
   attr_reader :id
 
@@ -25,22 +27,15 @@ class Page
     Page.get_field(self.id, :title)
   end
 
-  def markdown_body
+  def body_markdown
     Page.get_field(self.id, :body)
   end
 
-  def html_body
-    Page.markdown.render(self.markdown_body)
+  def body_html
+    HtmlGenerator.render(self.body_markdown)
   end
   
   private
-  # TODO: move Markdown parser to external decorator module
-  def self.markdown
-    @@renderer ||= Redcarpet::Render::HTML.new(:hard_wrap => true, :autolink => true)
-    @@markdown ||= Redcarpet::Markdown.new(@@renderer)
-
-    return @@markdown
-  end
   
   def self.i18n_key_for_field(id, field)
     "pages.show.#{id}.#{field}"

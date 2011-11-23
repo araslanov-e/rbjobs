@@ -11,7 +11,7 @@
   <article class="span6">
     <h1><%= link_to vacancy.title, vacancy %></h1>
     <h4 class="muted"><%= vacancy.company %></h4>
-    <%= simple_format vacancy.excerpt %>
+    <%= vacancy.excerpt_html.html_safe %>
   </article>
   <% end %>
 </section>
