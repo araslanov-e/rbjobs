@@ -7,6 +7,7 @@ log/*.log
 tmp/
 .sass-cache/
 config/database.yml
+config/mail.yml
 Capfile
 config/deploy.rb
 config/deploy

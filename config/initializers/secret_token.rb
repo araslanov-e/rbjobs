@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Rbjobs::Application.config.secret_token = 'd2f6c5980646c16b7829486388b14a2aaa01dd3441b08c5c427c7b34df36085c771fc2e2d390add53c9ece6b5a94a84baa2d60b4a914e931ece0f4e34d231aaf'
+Rbjobs::Application.config.secret_token = 'a291ae8412bd5d3088b2bd5e7d888f6d3d4002f38e8716f33014fad5e7975b4517fcd66b7e381cd7cad4e9f2147720f8a91a7fed43e4a95c6635d8b18eb84b33'

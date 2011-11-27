@@ -13,11 +13,6 @@ Rbjobs::Application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Any email will pop up in your browser instead of being sent.
-  # The messages are stored in tmp/letter_opener
-  # More info on https://github.com/ryanb/letter_opener
-  config.action_mailer.delivery_method = :letter_opener
-
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
@@ -29,4 +24,7 @@ Rbjobs::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
+
+  # Expands the lines which load the assets
+  config.assets.debug = true
 end

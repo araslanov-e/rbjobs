@@ -4,8 +4,11 @@ gem 'rails', '~> 3.1.3'
 gem 'jquery-rails'
 gem 'sqlite3', '~> 1.3.4'
 gem 'kaminari', '~> 0.12.4'
-gem 'postmark-rails', '~> 0.4.1'
 gem 'redcarpet', '~> 2.0.0b5'
+
+group :production do
+  gem 'postmark-rails', '~> 0.4.1'
+end
 
 group :development do
   gem 'letter_opener', '~> 0.0.2'
