@@ -85,7 +85,7 @@
         <%= f.submit t(".update"), :class => "btn success" %> 
         <%= link_to t(".cancel"), vacancy_url(f.object), :class => "btn" %>
       <% else %>
-        <p><%= t(".notes.terms") %></p>
+        <p><%= t(".notes.terms.text", :link => link_to(t(".notes.terms.link"), page_url(:terms))).html_safe %></p>
         <%= f.submit t(".create"), :class => "btn success" %> 
         <%= link_to t(".cancel"), root_url, :class => "btn" %>
       <% end %>
