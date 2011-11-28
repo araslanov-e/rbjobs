@@ -2,6 +2,8 @@ require "token_generator"
 require "html_generator"
 
 class Vacancy < ActiveRecord::Base
+  attr_accessible :title, :description, :location, :company, :url, :name, :email, :phone, :expire_at
+  
   validates :title, :presence => true
   validates :description, :presence => true
   validates :company, :presence => true
