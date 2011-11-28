@@ -6,7 +6,7 @@ ru:
       cancel: "Отмена"
       placeholders:
         title: "Например, 'Ведущий разработчик' или 'Ruby-ниндзя'"
-        description: "Неплохо также добавить сюда краткое описание компании"
+        description: "Для форматирования можно использовать Markdown"
       notes:
         expire_at_one_week: "Неделя"
         expire_at_two_weeks: "Две недели"
