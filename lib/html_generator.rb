@@ -4,8 +4,9 @@ module HtmlGenerator
   end
   
   class Markdown
-    @@renderer = Redcarpet::Render::HTML.new(:hard_wrap => true, :autolink => true)
-    @@markdown = Redcarpet::Markdown.new(@@renderer)
+    @@renderer = Redcarpet::Render::HTML.new(:hard_wrap => true, :filter_html => true, :no_images => true,
+                                             :no_links => true, :safe_links_only => true, :no_styles => true)
+    @@markdown = Redcarpet::Markdown.new(@@renderer, :autolink => true)
     
     def render(source)
       @@markdown.render(source)
