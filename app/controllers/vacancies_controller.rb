@@ -3,6 +3,7 @@ class VacanciesController < ApplicationController
   before_filter :store_token, :except => [:index, :new, :create]
   
   respond_to :html
+  respond_to :xml, :only => :index
   
   def index
     @vacancies = Vacancy.available.page(params[:page]).per(6)
