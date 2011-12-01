@@ -6,7 +6,7 @@ gem 'sqlite3', '~> 1.3.4'
 gem 'kaminari', '~> 0.12.4'
 gem 'redcarpet', '~> 2.0.0b5'
 
-group :production do
+group :staging, :production do
   gem 'postmark-rails', '~> 0.4.1'
 end
 
@@ -19,8 +19,5 @@ group :development, :test do
 end
 
 group :assets do
-  # gem 'sass-rails', '~> 3.1.0'
-  # gem 'coffee-rails', '~> 3.1.0'
   gem 'uglifier'
 end
-
