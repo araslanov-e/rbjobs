@@ -8,6 +8,7 @@ gem 'redcarpet', '~> 2.0.0b5'
 
 group :staging, :production do
   gem 'postmark-rails', '~> 0.4.1'
+  gem 'exception_notification', '~> 2.5.2'
 end
 
 group :development do
