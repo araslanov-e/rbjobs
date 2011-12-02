@@ -5,6 +5,7 @@ describe Vacancy do
     stub_model(Vacancy, {
       :title       => "Foo",
       :description => "Lorem ipsum",
+      :location    => "Neverland",
       :company     => "Foo Inc.",
       :email       => "person@example.com",
       :expire_at   => 1.week.from_now
@@ -18,6 +19,11 @@ describe Vacancy do
 
   it "isn't valid without description" do
     subject.description = nil
+    should_not be_valid
+  end
+
+  it "isn't valid without location" do
+    subject.location = nil
     should_not be_valid
   end
 

@@ -7,6 +7,7 @@ ru:
       placeholders:
         title: "Например, 'Ведущий разработчик' или 'Ruby-ниндзя'"
         description: "Для форматирования можно использовать Markdown"
+        location: "Город или 'удаленная работа'"
       notes:
         expire_at_one_week: "Неделя"
         expire_at_two_weeks: "Две недели"
