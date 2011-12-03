@@ -2,5 +2,10 @@ ru:
   layouts:
     application:
       meta_title: "Вакансии для разработчиков, использующих язык Ruby"
-      meta_description: ""
-      meta_keywords: ""
+      meta_description: "Размещение вакансий абсолютно бесплатное. RubyJobs.ru создан с целью поддержки сообщества разработчиков."
+      meta_keywords: "Ruby, Rails, вакансии, размещение вакансий, работа"
+      hosting: "При поддержке хостинг-провайдера %{link}"
+      pages:
+        about: "О проекте"
+        terms: "Условия"
+        contacts: "Контакты"

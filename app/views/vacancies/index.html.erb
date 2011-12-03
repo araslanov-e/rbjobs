@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
-  <h1>Вакансии для разработчиков, использующих Ruby</h1>
-  <p>Публикация абсолютно бесплатна и не требует регистрации.</p>
+  <h1><%= t(".sidebar.title") %></h1>
+  <p><%= t(".sidebar.description") %></p>
   <p><%= link_to t(".add"), new_vacancy_url, :class => "btn primary" %></p>
 <% end %>
 <% content_for :meta_title, t(".meta_title") %>

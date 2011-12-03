@@ -24,19 +24,19 @@
   <section class="row">
     <section class="span4">
       <address>
-        <strong>Компания</strong><br />
+        <strong><%= t(".company") %></strong><br />
         <%= @vacancy.company %><br />
         <% unless @vacancy.url.blank? %>
           <%= link_to @vacancy.url, @vacancy.url %><br />
         <% end %>
         <% unless @vacancy.phone.blank? %>
-          Телефон: <%= @vacancy.phone %>
+          <%= t(".phone") %>: <%= @vacancy.phone %>
         <% end %>
       </address>
     </section>
     <section class="span4">
       <address>
-        <strong>Контактная информация</strong><br />
+        <strong><%= t(".contacts") %></strong><br />
         <% unless @vacancy.name.blank? %>
           <%= @vacancy.name %><br />
         <% end %>
@@ -44,7 +44,7 @@
       </address>
     </section>
      <section class="span4">
-      <strong>Поделитесь ссылкой</strong><br />
+      <strong><%= t(".share_links") %></strong><br />
       <ul class="share-buttons">
         <li>
           <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= vacancy_url(@vacancy) %>" data-text="<%= @vacancy.title %>" data-count="none" data-via="rubyjobsru">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
@@ -60,13 +60,13 @@
    </section>
   <% if admin?(@vacancy) %>
     <section class="actions form-stacked">
-      <%= button_to("Опубликовать", approve_vacancy_url(@vacancy), :method => "put", :class => "small btn success") unless @vacancy.approved? %>
-      <%= link_to "Редактировать", edit_vacancy_url(@vacancy), :class => "small btn" %>
-      <%= button_to "Удалить", vacancy_url(@vacancy), :method => "delete", :confirm => "Подтверждаем удаление вакансии?", :class => "small btn danger" %>
+      <%= button_to(t(".publish"), approve_vacancy_url(@vacancy), :method => "put", :class => "small btn success") unless @vacancy.approved? %>
+      <%= link_to t(".edit"), edit_vacancy_url(@vacancy), :class => "small btn" %>
+      <%= button_to t(".destroy.button"), vacancy_url(@vacancy), :method => "delete", :confirm => t(".destroy.confirmation"), :class => "small btn danger" %>
     </section>
   <% elsif owner?(@vacancy) %>
     <section class="actions form-stacked">
-      <%= link_to "Редактировать", edit_vacancy_url(@vacancy), :class => "btn" %>
+      <%= link_to t(".edit"), edit_vacancy_url(@vacancy), :class => "btn" %>
     </section>
   <% end %>
 </article>
