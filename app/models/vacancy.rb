@@ -37,8 +37,8 @@ class Vacancy < ActiveRecord::Base
   
   protected
   
-  # Take the first to parts of text divided with two new new lines
-  def extract_excerpt(text, divider = "\n")
-    text.lines(divider).reject(&:blank?).take(2).join(divider)
+  # Take the first three parts of text
+  def extract_excerpt(text, divider = "\r\n\r\n")
+    text.lines(divider).to_a.each(&:strip!).reject(&:blank?).take(3).join(divider)
   end
 end
