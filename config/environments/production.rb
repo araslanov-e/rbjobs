@@ -57,4 +57,10 @@ Rbjobs::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  # Set exception notifier
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[RubyJobs.ru ~ production] ",
+    :sender_address => %{notifier@rubyjobs.ru},
+    :exception_recipients => %w{support@rubyjobs.ru}
 end
