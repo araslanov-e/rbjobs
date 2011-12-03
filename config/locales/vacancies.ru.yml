@@ -26,6 +26,9 @@ ru:
       add: "Добавить вакансию"
     new:
       meta_title: "Новая вакансия ~ RubyJobs.ru"
+      sidebar:
+        title: "На заметку"
+        description: "Помимо сайта, ваша вакансия будет опубликована в RSS-канале и Твиттере - @rubyjobsru."
       title: "Новая вакансия"
       create: "Сохранить"
     create:
