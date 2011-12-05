@@ -1,3 +1,4 @@
+<% content_for :meta_title, t(".meta_title", :title => @page.title) %>
 <article>
   <h1><%= @page.title %></h1>
   <%= @page.body_html.html_safe %>
