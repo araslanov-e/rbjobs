@@ -58,15 +58,6 @@
     </fieldset>
     <fieldset>
       <legend><%= t(".legends.contacts") %></legend>
-      <div class="clearfix <%= "error" if f.object.errors.include?(:company) %>">
-        <%= f.label :company, "<strong>#{t("activerecord.attributes.vacancy.company")}</strong>".html_safe %>
-        <div class="input">
-          <%= f.text_field :company, :class => "xlarge #{"error" if f.object.errors.include?(:company)}" %>
-          <% for error in f.object.errors.get(:company) %>
-            <%= content_tag(:span, error, :class => "help-block") %>
-          <% end %>
-         </div>
-      </div>
       <div class="clearfix <%= "error" if f.object.errors.include?(:email) %>">
         <%= f.label :email, "<strong>#{t("activerecord.attributes.vacancy.email")}</strong>".html_safe %>
         <div class="input">
@@ -75,6 +66,10 @@
             <%= content_tag(:span, error, :class => "help-block") %>
           <% end %>
          </div>
+      </div>
+      <div class="clearfix">
+        <%= f.label :company %>
+        <div class="input"><%= f.text_field :company, :class => "xlarge" %></div>
       </div>
       <div class="clearfix">
         <%= f.label :url %>

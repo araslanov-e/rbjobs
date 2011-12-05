@@ -7,7 +7,6 @@ class Vacancy < ActiveRecord::Base
   validates :title, :presence => true
   validates :description, :presence => true
   validates :location, :presence => true
-  validates :company, :presence => true
   validates :email, :presence => true, :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, :unless => Proc.new { |vacancy| vacancy.email.blank? } }
   validates :expire_at, :presence => true
   
