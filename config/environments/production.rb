@@ -62,5 +62,6 @@ Rbjobs::Application.configure do
   config.middleware.use ExceptionNotifier,
     :email_prefix => "[RubyJobs.ru ~ production] ",
     :sender_address => %{notifier@rubyjobs.ru},
-    :exception_recipients => %w{support@rubyjobs.ru}
+    :exception_recipients => %w{support@rubyjobs.ru},
+    :ignore_crawlers => %w{Googlebot bingbot}
 end
