@@ -1,6 +1,6 @@
 <% content_for :meta_title, t(".meta_title") %>
 
-<section class="span12">
-  <header class="page-header"><h1><%= t(".title") %></h1></header>
+<div class="span12">
+  <div class="page-header"><h1><%= t(".title") %></h1></div>
   <%= render :partial => "form", :locals => { :vacancy => @vacancy } %>
-</section>
+</div>

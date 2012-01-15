@@ -11,35 +11,57 @@
   <%= favicon_link_tag %>
 </head>
 <body>
-  <section class="container">
+  <div class="container">
     <% flash.each do |key, value| %>
     <div class="alert-message <%= key %> fade in" data-alert="alert">
       <a class="close" href="#">×</a>
       <p><%= value %></p>
     </div>
     <% end %>
-    <section class="row content-section">
-      <section class="span4 sidebar">
-        <section class="logo">
+    <div class="row content-section">
+      <div class="span4 sidebar">
+        <div class="logo">
           <%= link_to_if !current_page?(root_url), image_tag("rubyjobs-logo.png", :size => "76x67", :alt => t(".meta_title")), root_url %>
-        </section>
-        <section class="tips">
+        </div>
+        <div class="tips">
           <%= yield(:sidebar) %>
-        </section>
-      </section>
-      <section class="span12">
+        </div>
+      </div>
+      <div class="span12">
         <%= yield %>
-      </section>
-    </section>
-    <section class="row content-section">
-    </section>
+      </div>
+    </div>
+    <% if current_page?(root_url) %>
+    <div class="row content-section">
+      <div class="span4 sidebar">
+        <h1>Интересные события и проекты</h1>
+      </div>
+      <div class="span12">
+        <div class="row">
+          <div class="span6">
+            <p><strong>.тостер {ruby}</strong> &mdash; это техническая конференция. Цель &mdash; дать профессионалам возможность поделиться своими знаниями.</p>
+            <address>
+              <strong>10 февраля, Москва, Digital October</strong><br />
+              Подробности и регистрация на <a href="http://toster.ru">toster.ru</a>
+            </address>
+          </div>
+          <div class="span6">
+            <p><strong>RubyFlow.ru</strong> &mdash; коллективный блог сообщества разработчиков, использующих Ruby.</p>
+            <address>
+              Сайт &mdash; <a href="http://rubyflow.ru">http://rubyflow.ru</a>
+            </address>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
     <footer class="row footer">
-      <section class="span4">
+      <div class="span4">
         <p>&copy;&nbsp;2008&mdash;2011, <%= link_to "Alex Soulim", "http://soulim.com" %></p>
-      </section>
-      <section class="span6">
+      </div>
+      <div class="span6">
         <p><%= t(".hosting", :link => link_to(content_tag(:span, "locum.ru", :class => "label"), "http://locum.ru?code=f07cb8b5a66f6116967a13f8b2818e45fb644306")).html_safe %></p>
-      </section>
+      </div>
       <nav class="span6">
         <ul>
           <li><%= link_to t(".pages.about"), page_url(:about) %></li>
@@ -48,7 +70,7 @@
         </ul>
       </nav>
     </footer>
-  </section>
+  </div>
   
   <%= javascript_include_tag "application" %>
   <%= yield(:js) %>

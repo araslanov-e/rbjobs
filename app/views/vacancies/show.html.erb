@@ -21,8 +21,8 @@
   <h1><%= @vacancy.title %></h1>
   <h4 class="muted"><%= company_location_tag(@vacancy) %></h4>
   <%= @vacancy.description_html.html_safe %>
-  <section class="row">
-    <section class="span4">
+  <div class="row">
+    <div class="span4">
       <address>
         <strong><%= t(".company") %></strong><br />
         <%= @vacancy.company %><br />
@@ -33,8 +33,8 @@
           <%= t(".phone") %>: <%= @vacancy.phone %>
         <% end %>
       </address>
-    </section>
-    <section class="span4">
+    </div>
+    <div class="span4">
       <address>
         <strong><%= t(".contacts") %></strong><br />
         <% unless @vacancy.name.blank? %>
@@ -42,8 +42,8 @@
         <% end %>
         <%= mail_to @vacancy.email, nil, :encode => "hex", :replace_at => "[at]" %>
       </address>
-    </section>
-     <section class="span4">
+    </div>
+     <div class="span4">
       <strong><%= t(".share_links") %></strong><br />
       <ul class="share-buttons">
         <li>
@@ -56,17 +56,17 @@
           <div style="display:inline-block;vertical-align:bottom;" class="fb-like" data-href="<%= vacancy_url(@vacancy) %>" data-send="false" data-layout="button_count" data-width="" data-show-faces="false" data-action="like"></div>
         </li>
       </ul>
-     </section>
-   </section>
+     </div>
+   </div>
   <% if admin?(@vacancy) %>
-    <section class="actions form-stacked">
+    <div class="actions form-stacked">
       <%= button_to(t(".publish"), approve_vacancy_url(@vacancy), :method => "put", :class => "small btn success") unless @vacancy.approved? %>
       <%= link_to t(".edit"), edit_vacancy_url(@vacancy), :class => "small btn" %>
       <%= button_to t(".destroy.button"), vacancy_url(@vacancy), :method => "delete", :confirm => t(".destroy.confirmation"), :class => "small btn danger" %>
-    </section>
+    </div>
   <% elsif owner?(@vacancy) %>
-    <section class="actions form-stacked">
+    <div class="actions form-stacked">
       <%= link_to t(".edit"), edit_vacancy_url(@vacancy), :class => "btn" %>
-    </section>
+    </div>
   <% end %>
 </article>
