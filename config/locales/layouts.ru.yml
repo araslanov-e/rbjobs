@@ -9,3 +9,7 @@ ru:
         about: "О проекте"
         terms: "Условия"
         contacts: "Контакты"
+    vacancy_mailer:
+      signature: |
+        Александр Сулим
+        http://soulim.com
