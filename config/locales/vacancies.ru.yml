@@ -44,6 +44,7 @@ ru:
       destroy:
         button: "Удалить"
         confirmation: "Подтверждаем удаление вакансии?"
+      expiration_notice: "Это архивная вакансия. Срок ее размещения истек %{expire_at}"
     edit:
       meta_title: "Редактирование описания вакансии ~ RubyJobs.ru"
       title: "Редактирование"

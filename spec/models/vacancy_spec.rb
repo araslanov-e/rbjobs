@@ -84,4 +84,21 @@ describe Vacancy do
       end
     end
   end
+  
+  describe "#expired?" do
+    context "when expiration date is in future" do
+      before { subject.expire_at = 2.days.from_now }
+      
+      it "should return false" do
+        subject.should_not be_expired
+      end
+    end
+    context "when expiration date is in past" do
+      before { subject.expire_at = 2.days.ago }
+      
+      it "should return true" do
+        subject.should be_expired
+      end
+    end
+  end
 end

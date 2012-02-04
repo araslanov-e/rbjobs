@@ -1,5 +1,4 @@
-<% content_for :sidebar do %>
-<% end %>
+<%# content_for :sidebar %>
 <% content_for :meta_title, t(".meta_title", :vacancy => @vacancy.title) %>
 <% content_for :js do %>
   <!-- Facebook -->
@@ -69,4 +68,5 @@
       <%= link_to t(".edit"), edit_vacancy_url(@vacancy), :class => "btn" %>
     </div>
   <% end %>
+  <%= content_tag(:div, t(".expiration_notice", :expire_at => l(@vacancy.expire_at)), :class => "alert-message") if @vacancy.expired? %>
 </article>

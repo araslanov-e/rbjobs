@@ -34,6 +34,10 @@ class Vacancy < ActiveRecord::Base
     self.approved_at = Time.now and self.save!
   end
   
+  def expired?
+    self.expire_at.past?
+  end
+  
   protected
   
   # Take the first three parts of text
