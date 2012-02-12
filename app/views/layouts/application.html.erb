@@ -31,24 +31,6 @@
         <%= yield %>
       </div>
     </div>
-    <% if current_page?(root_url) %>
-    <div class="row content-section">
-      <div class="span4 sidebar">
-        <h1>Интересные события и проекты</h1>
-      </div>
-      <div class="span12">
-        <div class="row">
-          <div class="span6">
-            <p><%= link_to image_tag("toaster340x140.jpg", :size => "340x140"), "http://toster.ru/" %></p>
-          </div>
-          <div class="span6">
-            <p><strong>.тостер {ruby}</strong> &mdash; это техническая конференция. Цель &mdash; дать профессионалам возможность поделиться своими знаниями.</p>
-            <p><strong>Скидка 10%</strong> при покупке билета, если используете код <strong>rubyflow</strong></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <% end %>
     <footer class="row footer">
       <div class="span4">
         <p>&copy;&nbsp;2008&mdash;2012, <%= link_to "Alex Soulim", "http://soulim.com" %></p>
