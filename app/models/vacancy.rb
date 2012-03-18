@@ -22,7 +22,7 @@ class Vacancy < ActiveRecord::Base
 
   scope :approved, where("approved_at IS NOT NULL")
   scope :not_approved, where({ :approved_at => nil })
-  scope :not_outdated, where("expire_at >= ?", Date.current)
+  scope :not_outdated, lambda { where("expire_at >= ?", Date.current) }
   scope :descent_order, order("id DESC")
   scope :available, approved.not_outdated.descent_order
   
