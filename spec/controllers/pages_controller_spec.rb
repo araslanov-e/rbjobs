@@ -20,7 +20,7 @@ describe PagesController do
       end
       it "should render 404 page" do
         get 'show', :id => page
-        response.should render_template(:file => "public/404.html")
+        response.should render_template(:file => "public/404")
       end
     end
   end

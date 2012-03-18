@@ -7,7 +7,7 @@ class PagesController < ApplicationController
     if @page.present?
       respond_with(@page)
     else
-      render(:file => "public/404.html", :layout => false, :status => :not_found)
+      render(:file => "public/404", :layout => false, :status => :not_found)
     end
   end
   

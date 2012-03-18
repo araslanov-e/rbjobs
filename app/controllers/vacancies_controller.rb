@@ -29,7 +29,7 @@ class VacanciesController < ApplicationController
     if authorize!(:read, @vacancy)
       respond_with(@vacancy)
     else
-      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+      render(:file => 'public/404', :layout => false, :status => :not_found)
     end
   end
 
@@ -37,7 +37,7 @@ class VacanciesController < ApplicationController
     if authorize!(:edit, @vacancy)
       respond_with(@vacancy)
     else
-      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+      render(:file => 'public/404', :layout => false, :status => :not_found)
     end
   end
 
@@ -46,7 +46,7 @@ class VacanciesController < ApplicationController
       @vacancy.update_attributes(params[:vacancy]) and flash[:success] = t("vacancies.update.success")
       respond_with(@vacancy)
     else
-      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+      render(:file => 'public/404', :layout => false, :status => :not_found)
     end
   end
 
@@ -55,7 +55,7 @@ class VacanciesController < ApplicationController
       @vacancy.destroy and flash[:success] = t("vacancies.destroy.success")
       respond_with(@vacancy)
     else
-      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+      render(:file => 'public/404', :layout => false, :status => :not_found)
     end
   end
   
@@ -65,7 +65,7 @@ class VacanciesController < ApplicationController
       VacancyMailer.approval_notice(@vacancy).deliver
       respond_with(@vacancy)
     else
-      render(:file => 'public/404.html', :layout => false, :status => :not_found)
+      render(:file => 'public/404', :layout => false, :status => :not_found)
     end
   end
 

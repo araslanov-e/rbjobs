@@ -100,7 +100,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           get 'show', :id => vacancy, :token => vacancy.owner_token
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
       context "and visitor has admin token" do
@@ -116,7 +116,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           get 'show', :id => vacancy
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
     end
@@ -150,7 +150,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           get 'edit', :id => vacancy
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
     end
@@ -164,7 +164,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           get 'edit', :id => vacancy, :token => vacancy.owner_token
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
       context "and visitor has admin token" do
@@ -262,7 +262,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           put 'update', :id => vacancy
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
     end
@@ -276,7 +276,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           put 'update', :id => vacancy, :token => vacancy.owner_token
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
       context "and visitor has admin token" do
@@ -316,7 +316,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           put 'update', :id => vacancy
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
     end
@@ -338,7 +338,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           delete 'destroy', :id => vacancy, :token => vacancy.owner_token
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
       context "and visitor has admin token" do
@@ -362,7 +362,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           delete 'destroy', :id => vacancy
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
     end
@@ -376,7 +376,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           delete 'destroy', :id => vacancy, :token => vacancy.owner_token
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
       context "and visitor has admin token" do
@@ -400,7 +400,7 @@ describe VacanciesController do
         end
         it "should render 404 page" do
           delete 'destroy', :id => vacancy
-          response.should render_template(:file => 'public/404.html')
+          response.should render_template(:file => 'public/404')
         end
       end
     end
@@ -419,7 +419,7 @@ describe VacanciesController do
       end
       it "should render 404 page" do
         put 'approve', :id => vacancy, :token => vacancy.owner_token
-        response.should render_template(:file => 'public/404.html')
+        response.should render_template(:file => 'public/404')
       end
     end
     context "when visitor has admin token" do
@@ -452,7 +452,7 @@ describe VacanciesController do
       end
       it "should render 404 page" do
         put 'approve', :id => vacancy
-        response.should render_template(:file => 'public/404.html')
+        response.should render_template(:file => 'public/404')
       end
     end
   end

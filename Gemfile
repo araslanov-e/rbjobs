@@ -1,10 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1.3'
-gem 'jquery-rails'
-gem 'sqlite3', '~> 1.3.4'
-gem 'kaminari', '~> 0.12.4'
-gem 'redcarpet', '~> 2.0.0b5'
+gem 'rails', '~> 3.2.2'
+gem 'jquery-rails', '~> 2.0.1'
+gem 'sqlite3', '~> 1.3.5'
+gem 'kaminari', '~> 0.13.0'
+gem 'redcarpet', '~> 2.1.1'
 
 group :staging, :production do
   gem 'postmark-rails', '~> 0.4.1'
@@ -16,9 +16,9 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 2.7.0'
+  gem 'rspec-rails', '~> 2.9.0'
 end
 
 group :assets do
-  gem 'uglifier'
+  gem 'uglifier', '~> 1.2.3'
 end
